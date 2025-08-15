@@ -1,14 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
-// Firebase configuration using your existing database URL
+// Firebase configuration - Update these with your actual Firebase project credentials
 const firebaseConfig = {
-  databaseURL: "https://coc-keys-default-rtdb.asia-southeast1.firebasedatabase.app",
-  // Add other config properties if needed in the future
-  projectId: "coc-keys-default",
-  storageBucket: "coc-keys-default.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "demo-api-key",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "coc-keys-default.firebaseapp.com",
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL || "https://coc-keys-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "coc-keys-default",
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || "coc-keys-default.appspot.com",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || "123456789",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:123456789:web:abcdef123456"
 };
 
 // Initialize Firebase
