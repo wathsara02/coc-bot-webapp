@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/coc-bot-webapp/static/css/main.e0dfc571.css",
+    "main.js": "/coc-bot-webapp/static/js/main.d442c54c.js",
+    "index.html": "/coc-bot-webapp/index.html",
+    "main.e0dfc571.css.map": "/coc-bot-webapp/static/css/main.e0dfc571.css.map",
+    "main.d442c54c.js.map": "/coc-bot-webapp/static/js/main.d442c54c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e0dfc571.css",
+    "static/js/main.d442c54c.js"
+  ]
+}
