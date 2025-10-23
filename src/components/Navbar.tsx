@@ -35,6 +35,16 @@ const Navbar: React.FC = () => {
               💬 Feedback
             </Link>
           </li>
+          <li>
+            <Link to="/activity" className={isActive('/activity')}>
+              📊 Activity
+            </Link>
+          </li>
+          <li>
+            <Link to="/users" className={isActive('/users')}>
+              👥 Users
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

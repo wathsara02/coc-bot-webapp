@@ -16,6 +16,12 @@ const Feedback: React.FC = () => {
         // Sort by timestamp (newest first)
         const dateA = new Date(a.timestamp.split(' ').reverse().join('-'));
         const dateB = new Date(b.timestamp.split(' ').reverse().join('-'));
+        
+        // Handle invalid dates by putting them at the end
+        if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+        if (isNaN(dateA.getTime())) return 1;
+        if (isNaN(dateB.getTime())) return -1;
+        
         return dateB.getTime() - dateA.getTime();
       });
   }, [feedback]);
@@ -28,7 +34,7 @@ const Feedback: React.FC = () => {
     
     const recent = sortedFeedback.filter(item => {
       const feedbackDate = new Date(item.timestamp.split(' ').reverse().join('-'));
-      return feedbackDate >= oneDayAgo;
+      return !isNaN(feedbackDate.getTime()) && feedbackDate >= oneDayAgo;
     }).length;
     
     const uniqueUsers = new Set(sortedFeedback.map(item => item.user_name)).size;
@@ -42,13 +48,37 @@ const Feedback: React.FC = () => {
 
   const formatTimestamp = (timestamp: string): string => {
     try {
+      // Handle empty or null timestamps
+      if (!timestamp || timestamp.trim() === '') {
+        return 'Unknown';
+      }
+
       // Convert DD/MM/YYYY HH:MM to a proper date
       const [datePart, timePart] = timestamp.split(' ');
+      if (!datePart || !timePart) {
+        return timestamp;
+      }
+      
       const [day, month, year] = datePart.split('/');
+      if (!day || !month || !year) {
+        return timestamp;
+      }
+      
       const dateObj = new Date(`${year}-${month}-${day} ${timePart}`);
+      
+      // Check if the date is valid
+      if (isNaN(dateObj.getTime())) {
+        return timestamp;
+      }
       
       const now = new Date();
       const diffMs = now.getTime() - dateObj.getTime();
+      
+      // Handle future dates
+      if (diffMs < 0) {
+        return 'Future date';
+      }
+      
       const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
       const diffDays = Math.floor(diffHours / 24);
       
